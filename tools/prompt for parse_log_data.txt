@@ -1,0 +1,50 @@
+I need a Python script to parse a simple log format from a custom benchmarking setup. The tool takes a text file as an input and output a text description.
+
+== Input file data
+
+A text file where each entry is two lines, which are both hexadecimal numbers without a prefix. The first entry is the test ID. This is matched with a user provided list of names for example using a list of structs:
+
+```
+test_list = {
+	(0x0D7B, "Basic test"),
+	(0x0DBC, "Extended test"),
+}
+```
+
+If the test is not found in the list, the name is listed as unknown with the hex ID in parentheses. Example: `"Unknown (0x1234)"`
+
+The second entry is the time the test took, in counts of 1/2097152 seconds. So, divide this value by 2097152 to get the time taken in seconds.
+
+The same test can appear multiple times in a test log.
+
+Example input data:
+
+```
+0D7B
+00089290
+0D7B
+00089290
+0D7B
+00089290
+0D7B
+00089292
+0DBC
+000883CE
+0DBC
+000883CF
+0DBC
+000883CE
+0DBC
+000883CA
+```
+
+== Output
+
+For each test, list the number of time the test was performed, a list of all test times for the test, and the minimal and average time taken. The maximum time does not need to be reported. All times are displayed in seconds, with 3 decimal places, or in other words down to millisecond precision.
+
+Sample output:
+```
+Test A ran 3 times:
+Times: 1.234 s, 1.233 s, 1.235 s
+Minimum time: 1.233 s
+Average time: 1.234 s
