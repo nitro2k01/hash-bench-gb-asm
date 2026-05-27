@@ -44,7 +44,7 @@ These are the test results of the algorithms implemented so far, as well the cor
 | CRC-32      | 362 ms / 243 ms   | 1076 ms  | 4.43x faster. The slower time is a variant placing the hash state in RAM and the faster time places it in registers. |
 | CRC-64      | 606 ms            | 5726 ms / 2762 ms | 9.45x / 4.56x faster. CRC-64 was omitted from the original Hash-bench-gb test. I added it back in out of curiosity. The second faster result is an optimized c version that doesn't rely on the `Hash-bench-gb` data type. See commentary below.
 | ADL-32      | 31 ms             | 165 ms   | 5.32x faster. |
-| Fletcher-16 | 16 ms             | 1358 ms / 109 ms  | 84.9x(!) / 6.8x faster. 1358 ms seemed like an abnormally slow speed for this algorithm. I made a simple optimization that made it 10x faster. See commentary below. |
+| Fletcher-16 | 16 ms             | 1358 ms / 109 ms  | 84.9x(!) / 6.8x faster. 1358 ms seemed like an abnormally slow speed for this algorithm. I made a simple optimization to the c version that made it 10x faster. See commentary below. |
 | Fletcher-32 |                   | 398 ms   |  |
 | Pearson-8   | 10 ms             | 54 ms    | 5.40x faster. |
 | Knuth-mul   | 741 ms            | 1318 ms  | 1.78x faster. |
