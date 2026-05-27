@@ -65,7 +65,7 @@ These are the test results of the algorithms implemented so far, as well the cor
 
 This is a potential shortcoming I identified in the original project, which really seems to come from the standard GBDK runtime environment I guess. It's using the frame counter for timing, which gives a ±0.5 frames or ±8 ms jitter. I wanted something better. I chose to use the timer and timer interrupt of the GB. Because of the GB's binary clock frequency (4.19 Mhz or 4\*1024\*1024 Hz master clock) everything fits nicely into essentially a binary counter. The timer interrupt is set up to trigger at 256 Hz and increment a software timer. After 256 counts, which (by design) is when a byte counter overflows, the second counter is incremented. The 256 Hz timer is created by setting the prescaler to the 16 kiHz (16384 Hz) mode, and the modulo is set to divide the prescaled clock by 64 (in normal speed) or 128 (in double speed). The current timer value can be read out and added to the fractional precision. This means an additional 6, 7 bits of precision for a total of 14-15 bits of precision for the fractional second value. Effectively, the timing measurement has a precision of 61 microseconds which, even with measurement jitter, is well below the displayed precision of milliseconds. Therefore, there was no need to repeat fast hashes multiple times to increase the accuracy. 
 
-However, this does mean that interrupts may not be disabled for more than 64 M cycles, or interrupts will be missed. 
+However, this does mean that interrupts may not be disabled for more than ~3.9 ms (1/256 s) or interrupts will be missed. 
 
 The seconds counter is 16 bit, allowing for a 65536 seconds or over 18 hours to be counted. 
 
