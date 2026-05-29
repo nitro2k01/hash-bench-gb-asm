@@ -17,7 +17,7 @@ This is still an early release just to get this thing out to the world so it doe
 - Most hashes are not implemented yet, especially the crypto ones. Those will be a real pain to do in asm, but I want to get to it some day soon.
 - The code is a mess and a lot of things would need refactoring. For example moving the hash functions to their own files. The hashes are doing ugly things like using the hash buffer for loop counters with direct pointer arithmetic. Solve this better using `union`s or something.
 - Any kind of actually interactive UI. Can't rerun the sweep or select double speed GBC mode for example. Would like to add a UI to inspect the full hash. 
-- The seconds timer currently doesn't print the high byte of the seconds (>255 seconds). It also prints the low byte as heex instead of decimal. I'll change that when any time measured in the test comes close to taking 10 seconds, hehe.
+- The seconds timer currently doesn't print the high byte of the seconds (>255 seconds). It also prints the low byte as hex instead of decimal. I'll change that when any time measured in the test comes close to taking 10 seconds, hehe.
 
 ## AI disclosure
 
@@ -661,9 +661,9 @@ This is a fairly universal optimization that's likely to be an improvement acros
 
 ```c
   a = (uint16_t)(a + data[i]);
-  if (a>=254u){a-=255u;}
+  if (a>=255u){a-=255u;}
   b = (uint16_t)(b + a);
-  if (b>=254u){b-=255u;}
+  if (b>=255u){b-=255u;}
 ```
 
 
